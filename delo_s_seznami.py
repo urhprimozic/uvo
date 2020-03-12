@@ -63,7 +63,11 @@ def porezani_podseznami(sez):
 #     >>> najvecji_element([1, 4, 5, 5, 2, -10])
 #     5
 # =============================================================================
-
+def najvecji_element(a):
+    if len(a) == 0:
+        return 
+    return max(a)
+    
 # =====================================================================@020116=
 # 5. podnaloga
 # Sestavite funkcijo `zdruzi_sezname`, ki zdruzi seznam seznamov v en seznam,
@@ -74,7 +78,12 @@ def porezani_podseznami(sez):
 #     >>> zdruzi_sezname([[], [0], [], [0], [], [7], []])
 #     [0, 0, 7]
 # =============================================================================
-
+def zdruzi_sezname(bigB0y):
+    # že spet mormo delat cancer z rekurzijo
+    is_actually_small = 0
+    if len(bigB0y) == is_actually_small:
+        return []
+    return bigB0y[0] + zdruzi_sezname(bigB0y[1:])
 
 
 

@@ -7,7 +7,8 @@
 #     >>> prezrcali('abeceda')
 #     'adeceba'
 # =============================================================================
-
+def prezrcali(a):
+    return a[::-1]
 # =====================================================================@009774=
 # 2. podnaloga
 # Sestavite funkcijo `je_palindrom`, ki preveri, če je niz palindrom.
@@ -15,7 +16,10 @@
 #     >>> je_palindrom('kajak')
 #     True
 # =============================================================================
-
+def je_palindrom(a):
+    if len(a) == 0 or len(a) == 1:
+        return True
+    return (a[0] == a[-1]) and je_palindrom(a[1:-1])
 # =====================================================================@009772=
 # 3. podnaloga
 # Sestavite funkcijo `odstrani_presledke`, ki sprejme niz in vrne nov niz, ki
@@ -24,7 +28,14 @@
 #     >>> odstrani_presledke('Ni vsak dan nedelja')
 #     'Nivsakdannedelja'
 # =============================================================================
-
+def odstrani_presledke(a):
+    # zanke so pikiji
+    if len(a) == 0:
+        return a
+    curr = ""
+    if a[0] != " ":
+        curr = a[0]
+    return curr + odstrani_presledke(a[1:])
 # =====================================================================@020115=
 # 4. podnaloga
 # Napišite funkcijo `odstrani_ponovljene_presledke`, ki sprejme niz in vrne nov
@@ -33,7 +44,15 @@
 #     >>> odstrani_ponovljene_presledke('  * -   *   - * ')
 #     ' * - * - * '
 # =============================================================================
-
+def odstrani_ponovljene_presledke(a):
+    if len(a) <= 1:
+        return a
+    if a[0] != " ":
+        return a[0] + odstrani_ponovljene_presledke(a[1:])
+    # presledek
+    if a[1] == " ":
+        return odstrani_ponovljene_presledke(a[1:])
+    return " " + odstrani_ponovljene_presledke(a[1:])
 # =====================================================================@020114=
 # 5. podnaloga
 # Na zabavi ste uspeli dobiti telefonsko številko sošolke/sošolca, ki ste jo/ga
@@ -54,7 +73,19 @@
 #     >>> najdi_stevilko('0*1123*57', ['041123457', '071123456', '051123457'])
 #     ['041123457', '051123457']
 # =============================================================================
+def ustreza(v, n):
+    if len(v) == 0:
+        return True
+    if v[0] == '*' or v[0] == n[0]:
+        return ustreza(v[1:], n[1:])
+    return False
 
+def najdi_stevilko(v, sez):
+    if sez == []:
+        return sez
+    if ustreza(v, sez[0]):
+        return [sez[0]] + najdi_stevilko(v, sez[1:])
+    return najdi_stevilko(v, sez[1:])
 
 
 

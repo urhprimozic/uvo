@@ -14,7 +14,16 @@
 #     >>> vecji_element([3], 3)
 #     False
 # =============================================================================
-
+def vecji_element(sez, n):
+    # že spet kličemo demone z rekurzijo
+    # kaj mi bo duša če pa lahk dissam zanke
+    if len(sez) == 0:
+        return 0
+    if sez[0] > n:
+        return True
+    if len(sez) == 1:
+        return False
+    return vecji_element(sez[1:], n)
 # =====================================================================@013129=
 # 2. podnaloga
 # Definirajte funkcijo `prvi_najvecji`, ki kot rezultat vrne `True`, če je prvi
@@ -26,7 +35,12 @@
 #     >>> prvi_najvecji([8, 7, 5, 1])
 #     True
 # =============================================================================
-
+def prvi_najvecji(a):
+    # ne da se mi več trpet
+    for i in a:
+        if i > a[0]: 
+            return False
+    return True
 # =====================================================================@013132=
 # 3. podnaloga
 # Definirajte funkcijo `vsi_vecji(sez1, sez2)`, ki sprejme dva seznama, `sez1`
@@ -38,7 +52,10 @@
 #     >>> vsi_vecji([5, 8], [1, 2, 4])
 #     True
 # =============================================================================
-
+def vsi_vecji(sez1, sez2):
+    if len(sez1) == 0:
+        return True
+    return prvi_najvecji([sez1[0]] + sez2) and vsi_vecji(sez1[1:], sez2)
 
 
 

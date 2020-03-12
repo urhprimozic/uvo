@@ -9,7 +9,10 @@
 #     >>> je_deljivo_s_katerim_od(20, [3, 4, 6])
 #     True
 # =============================================================================
-
+def je_deljivo_s_katerim_od(n, sez):
+    if len(sez) == 0:
+        return False
+    return (n % sez[0] == 0) or je_deljivo_s_katerim_od(n, sez[1:])
 # =====================================================================@009810=
 # 2. podnaloga
 # Definirajte funkcijo `prastevila_do`, ki vrne seznam vseh praštevil, ki so
@@ -18,12 +21,45 @@
 #     >>> prastevila_do(10)
 #     [2, 3, 5, 7]
 # =============================================================================
+def delitelj(x, sez):
+    """Pogleda, ali kateri od elementov iz sez (ki je urejen!!!!) deli x"""
+    for i in sez:
+        if i > x ** 1/2: # če je zasdeva večja od korena, pač ne more delit zadeve2
+            break
+        if x % i == 0:
+            return True
+    return False
+
+
+def prastevila_do(n):
+    # uradna rešitev verjetno uporabi (1), ampšak naredimo zadevo kot je treba
+    if n < 2:
+        return []
+    if n == 2:
+        return [2]
+    if n == 3:
+        return [2, 3]
+    prastevila = [2, 3]
+    k = 1
+    j = -1
+    while 6 * k + j <= n:
+        if not delitelj(6 * k + j, prastevila):
+            prastevila += [6 * k + j]
+        j *= (-1)
+        if j == -1:
+            k += 1
+    return prastevila
 
 # =====================================================================@009811=
 # 3. podnaloga
 # Definirajte funkcijo `je_prastevilo`, ki vrne ali je število praštevilo.
 # =============================================================================
-
+def je_prastevilo(n):
+    if n < 2:
+        return 0
+    if prastevila_do(n)[-1] == n:
+        return True
+    return False
 
 
 
