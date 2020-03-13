@@ -1,50 +1,38 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Preverimo urejanje
+# =====================================================================@020193=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
+# Z namenom preverjanja različnih algoritmov za urejanje seznamov, si želite
+# pripraviti zanimive testne primere. Ti bodo sestavljeni iz seznamov parov, 
+# kjer druga komponenta pove, na katerem mestu mora stati par. 
 # 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+# Sestavite funkcijo `pripravi_primer`, ki sprejme dva seznama - seznam 
+# elementov in seznam indeksov - ter iz njiju napravi testni primer. 
+# 
+#     >>> pripravi_primer(["c", "b", "d", "a"], [2, 1, 3, 0])
+#     [('c', 2), ('b', 1), ('d', 3), ('a', 0)]
+#     >>> pripravi_primer(['daj', 'cas', 'da', 5, 'zapeljem', 'mi', 'te', 'minut'],[3, 4, 5, 0, 7, 2, 6, 1])
+#     [('daj', 3), ('cas', 4), ('da', 5), (5, 0), ('zapeljem', 7), ('mi', 2), ('te', 6), ('minut', 1)]
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
+
+# =====================================================================@020192=
 # 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
+# Svoje urejevalne algoritme ste uporabili na primerih in želite preveriti,
+# ali delujejo pravilno. Sestavite funkcijo`pravilno_urejen`, ki pove, ali je
+# seznam urejen skladno z zgornjim principom.
 # 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
+# Namig: uporabite funkcijo `enumerate`
 # 
-# *Namig:* poglejte v knjižnico `math`.
+#     >>> pravilno_urejen([('so', 5), ('vcasih', 6), ('stezice', 3), ('bile?', 7), ('tiste', 2), ('k', 4), ('Kje', 0), ('so', 1)])
+#     False
+#     >>> pravilno_urejen([('Kje', 0), ('so', 1), ('tiste', 2), ('stezice', 3), ('k', 4), ('so', 5), ('vcasih', 6), ('bile?', 7)])
+#     True
+#     >>> pravilno_urejen([('daj', 3), ('cas', 4), ('da', 5), (5, 0), ('zapeljem', 7), ('mi', 2), ('te', 6), ('minut', 1)])
+#     False
+#     >>> pravilno_urejen([(5, 0), ('minut', 1), ('mi', 2), ('daj', 3), ('cas', 4), ('da', 5), ('te', 6), ('zapeljem', 7)])
+#     True
 # =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
-# 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
-# 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
-# =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+
 
 
 
@@ -604,34 +592,32 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyMDE5M30:1jCqjg:UbygNV_yyMuRRqmCCJZuO6yrxbs'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
+            Check.equal("pripravi_primer(['so', 'vcasih', 'stezice', 'bile?', 'tiste', 'k', 'Kje', 'so'], [5, 6, 3, 7, 2, 4, 0, 1])",
+                        [('so', 5),('vcasih', 6), ('stezice', 3), ('bile?', 7), ('tiste', 2), ('k', 4), ('Kje', 0), ('so', 1)])
+            Check.equal("pripravi_primer(['daj', 'cas', 'da', 5, 'zapeljem', 'mi', 'te', 'minut'],[3, 4, 5, 0, 7, 2, 6, 1])",
+                        [('daj', 3), ('cas', 4), ('da', 5), (5, 0), ('zapeljem', 7), ('mi', 2), ('te', 6), ('minut', 1)])
+            Check.equal("pripravi_primer(['parara', 'podarim', 'Lahko', 'parara', 'papapa', 'samo', 'ljubezen', 'ti'],[5, 2, 0, 7, 6, 3, 4, 1])",
+                        [('parara', 5), ('podarim', 2), ('Lahko', 0), ('parara', 7), ('papapa', 6), ('samo', 3), ('ljubezen', 4), ('ti', 1)])
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyMDE5Mn0:1jCqjg:6vAajDflwbjwmOrVWuTASBdqrd0'
         try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
-        except:
-            Check.error("Testi sprožijo izjemo\n  {0}",
-                        "\n  ".join(traceback.format_exc().split("\n"))[:-2])
-
-    if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
-        try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            Check.equal("pravilno_urejen([('banana', 2),('paradiznik', 0),('zelje', 3),('kivi', 1)])", False)
+            Check.equal('pravilno_urejen([(100, 0), (99, 1), (77, 2), (13, 3), (42, 4)])', True)
+            Check.equal('pravilno_urejen([])', True)
+            Check.equal('pravilno_urejen([("prvi", 0)])', True)
+            Check.equal('pravilno_urejen([("prvi", 1)])', False) and \
+            Check.equal("pravilno_urejen([('parara', 5), ('podarim', 2), ('Lahko', 0), ('parara', 7), ('papapa', 6), ('samo', 3), ('ljubezen', 4), ('ti', 1)])", False) and \
+            Check.equal("pravilno_urejen([('Lahko', 0), ('ti', 1), ('podarim', 2), ('samo', 3), ('ljubezen', 4), ('parara', 5), ('papapa', 6), ('parara', 7)])", True) and \
+            Check.equal("pravilno_urejen([('so', 5), ('vcasih', 6), ('stezice', 3), ('bile?', 7), ('tiste', 2), ('k', 4), ('Kje', 0), ('so', 1)])", False) and \
+            Check.equal("pravilno_urejen([('Kje', 0), ('so', 1), ('tiste', 2), ('stezice', 3), ('k', 4), ('so', 5), ('vcasih', 6), ('bile?', 7)])", True) and \
+            Check.equal("pravilno_urejen([('daj', 3), ('cas', 4), ('da', 5), (5, 0), ('zapeljem', 7), ('mi', 2), ('te', 6), ('minut', 1)])", False) and \
+            Check.equal("pravilno_urejen([(5, 0), ('minut', 1), ('mi', 2), ('daj', 3), ('cas', 4), ('da', 5), ('te', 6), ('zapeljem', 7)])", True)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])

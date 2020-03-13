@@ -42,7 +42,13 @@ def v_preseku(x, y, krogi):
 #     (-1, -1, 1, 1)
 # =============================================================================
 def pravokotnik(krogi):
-    
+    # (x_min, y_min, x_max, y_max)
+    x = krogi[0][0]
+    y = krogi[0][1]
+    r = krogi[0][2]
+    if len(krogi) == 1:
+        return (x - r, y - r, x + r, y + r)
+    return (min(x - r, pravokotnik(krogi[1:])[0]), min(y - r, pravokotnik(krogi[1:])[1]), max(x + r,pravokotnik(krogi[1:])[2]), max(y + r, pravokotnik(krogi[1:])[3]))
 
 
 

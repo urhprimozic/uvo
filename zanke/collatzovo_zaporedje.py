@@ -1,50 +1,41 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Collatzovo zaporedje
+#
+# *Nalogo tokrat rešujte z zankami.*
+# 
+# Collatzovo zaporedje tvorimo na sledeč način. Začnemo z nekim naravnim
+# številom $n$, ki ga nato delimo z $2$, če je sodo, ali pa pomnožimo s $3$ in
+# prištejemo $1$, če je liho. Postopek ponavljamo, dokler ne pridemo do števila
+# $1$ (v tem primeru stvar ni več zanimiva, saj se začno ponavljati števila
+# $1, 4, 2, 1, 4, 2, 1, \ldots$). Primer zaporedja, ki se začne z $6$ je tako
+# $6, 3, 10, 5, 16, 8, 4, 2, 1$. Collatzova domneva, ki trdi, da za poljubno
+# naravno število njegovo Collatzovo zaporedje sčasoma doseže $1$, je še vedno
+# nerešena.
+# =====================================================================@000985=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
-# 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+# Sestavite funkcijo `naslednji_clen`, ki sprejme število in izračuna člen,
+# ki v Collatzovemu zaporedju sledi temu številu.
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
+
+# =====================================================================@000986=
 # 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
-# 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
-# 
-# *Namig:* poglejte v knjižnico `math`.
+# Sestavite funkcijo `dolzina_zaporedja`, ki sprejme število in izračuna 
+# dolžino Collatzovega zaporedja, ki se začne s tem številom.
 # =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
+
+# =====================================================================@000987=
 # 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
-# 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
+# Sestavite funkcijo `najvecji_clen`, ki sprejme število in izračuna največji 
+# člen v Collatzovem zaporedju, ki se začne s tem številom.
 # =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+
+# =====================================================================@000988=
+# 4. podnaloga
+# Sestavite funkcijo `najdaljse_zaporedje(m, n)`, ki vrne dolžino najdaljšega
+# zaporedja med vsemi tistimi Collatzovimi zaporedji, ki se začnejo s števili
+# med (vključno) `m` in `n`.
+# =============================================================================
+
 
 
 
@@ -604,34 +595,46 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5ODV9:1jCqjg:l3mFnjlUrq1qjNK-fi29lqd7Zjc'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
+            Check.equal('naslednji_clen(1)', 4)
+            Check.equal('naslednji_clen(2)', 1)
+            Check.equal('naslednji_clen(42)', 21)
+            Check.equal('naslednji_clen(121)', 364)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5ODZ9:1jCqjg:b5RgL-0UPdZo601Ereh_v2aw5kk'
         try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
+            Check.equal('dolzina_zaporedja(1)', 1)
+            Check.equal('dolzina_zaporedja(2)', 2)
+            Check.equal('dolzina_zaporedja(42)', 9)
+            Check.equal('dolzina_zaporedja(121)', 96)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5ODd9:1jCqjg:YXjUb7_CKenuPkU1eeOnpCoNoEU'
         try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            Check.equal('najvecji_clen(42)', 64)
+            Check.equal('najvecji_clen(121)', 9232)
+            Check.equal('najvecji_clen(2015)', 39364)
+            Check.equal('najvecji_clen(1)', 1)
+        except:
+            Check.error("Testi sprožijo izjemo\n  {0}",
+                        "\n  ".join(traceback.format_exc().split("\n"))[:-2])
+
+    if Check.part():
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5ODh9:1jCqjg:G6g7sAD18Ishbl4wo0O4gMuIllI'
+        try:
+            Check.equal('najdaljse_zaporedje(1, 1)', 1)
+            Check.equal('najdaljse_zaporedje(13, 13)', 10)
+            Check.equal('najdaljse_zaporedje(4, 16)', 20)
+            Check.equal('najdaljse_zaporedje(1, 42)', 112)
+            Check.equal('najdaljse_zaporedje(100, 200)', 125)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])

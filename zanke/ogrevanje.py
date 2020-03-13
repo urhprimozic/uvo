@@ -1,50 +1,73 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Ogrevanje
+# =====================================================================@020188=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
+# Nagajivi škrat je pokvaril zamike v funkciji `vsebuje_vprasaj` in premešal
+# vrstice v funkciji `odstrani_presledke`. Popravite obe funkciji tako, da
+# uspešno opravita vse teste.
 # 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+# *Funkciji sta že definirani v datoteki.*
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
+def vsebuje_vprasaj(niz):
+    for znak in niz:
+        if znak == "?":
+            return True
+    return False
+
+def odstrani_presledke(niz):
+    nov_niz = ""
+    for znak in niz:
+        if not znak == " ":
+            nov_niz += znak
+    return nov_niz
+# =====================================================================@020189=
 # 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
+# Napišite funkcijo `vsebuje_niz_z_vprasajem`, ki sprejme seznam nizov ter
+# preveri, ali v seznamu obstaja niz, ki vsebuje vprašaj.
 # 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
-# 
-# *Namig:* poglejte v knjižnico `math`.
+#     >>> vsebuje_niz_z_vprasajem(['Katera', 'riba', 'bi', 'pa', 'ne', 'more?'])
+#     True
+#     >>> vsebuje_niz_z_vprasajem(['Skuša'])
+#     False
 # =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
+def vsebuje_niz_z_vprasajem(sez):
+    for i in sez:
+        if '?' in i:
+            return True
+    return False
+# =====================================================================@020190=
 # 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
+# Sestavite funkcijo `zgolj_dolge_besede`, ki sprejme seznam nizov in število,
+# ki predstavlja najmanjšo zahtevano dolžino niza, ter preveri, da so vsi nizi
+# v seznamu primerne dolžine.
 # 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
+#     >>> zgolj_dolge_besede(['Gandalf', 'Aragorn', 'Gimli', 'Legolas'], 5)
+#     True
+#     >>> zgolj_dolge_besede(['goblin', 'ork', 'zmaj', 'Balrog'], 5)
+#     False
 # =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+def zgolj_dolge_besede(sez, n):
+    for i in sez:
+        if len(i) < n:
+            return False
+    return True
+# =====================================================================@020191=
+# 4. podnaloga
+# Implementirajte [Evklidov algoritem](https://sl.wikipedia.org/wiki/Evklidov_algoritem)
+# s pomočjo zanke `while`.
+# 
+#     >>> evklidov_algoritem(144, 40)
+#     8
+#     >>> evklidov_algoritem(81, 36)
+#     9
+# =============================================================================
+def evklidov_algoritem(a, b):
+    t = b
+    while b != 0:
+        t = b
+        b = a % b
+        a = t
+    return a
 
 
 
@@ -604,34 +627,56 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyMDE4OH0:1jCqjg:uErvFiuWq4ohJQjQKFLiifsbnv4'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
+            Check.equal('vsebuje_vprasaj("")', False)
+            Check.equal('vsebuje_vprasaj("?")', True)
+            Check.equal('vsebuje_vprasaj("Banana")', False) and \
+            Check.equal('vsebuje_vprasaj("Poma(???)ranča.")', True) and \
+            Check.equal('vsebuje_vprasaj("Kivi?")', True)
+            
+            Check.equal('odstrani_presledke("")', '')
+            Check.equal('odstrani_presledke("   ")', '')
+            Check.equal('odstrani_presledke("Kdor drugemu jamo koplje kruha strada.")', "Kdordrugemujamokopljekruhastrada.")
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyMDE4OX0:1jCqjg:4CZ1Vzo2aEP1M84MaWma_zPfqh8'
         try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
+            Check.equal("vsebuje_niz_z_vprasajem(['Katera', 'riba', 'bi', 'pa', 'ne', 'more?'])", True)
+            Check.equal("vsebuje_niz_z_vprasajem(['Skuša'])", False)
+            Check.equal("vsebuje_niz_z_vprasajem(['Slabe', 'šale', 'nam', 'niso', 'izpod', 'časti'])", False)
+            Check.equal("vsebuje_niz_z_vprasajem(['???'])", True)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyMDE5MH0:1jCqjg:RNl8BgQAhJ5azL-KyQzqToJd48c'
         try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            Check.equal("zgolj_dolge_besede(['Gandalf', 'Aragorn', 'Gimli', 'Legolas'], 5)", True)
+            Check.equal("zgolj_dolge_besede(['goblin', 'ork', 'zmaj', 'Balrog'], 5)", False)
+            Check.equal("zgolj_dolge_besede([], 28537)", True)
+        except:
+            Check.error("Testi sprožijo izjemo\n  {0}",
+                        "\n  ".join(traceback.format_exc().split("\n"))[:-2])
+
+    if Check.part():
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyMDE5MX0:1jCqjg:FOTRtzlptM5yBSTP5Rra9Es5Hz0'
+        try:
+            Check.equal('evklidov_algoritem(144, 40)', 8)
+            Check.equal('evklidov_algoritem(81, 36)', 9)
+            Check.equal('evklidov_algoritem(10, 10)', 10)
+            Check.equal('evklidov_algoritem(17, 13)', 1)
+            
+            import random
+            random.seed(1)
+            for i in range(100):
+                x = random.randint(1, 10000)
+                offset = random.randint(1, 10000)
+                Check.secret(evklidov_algoritem(x + offset, x), (x + offset, x))
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])

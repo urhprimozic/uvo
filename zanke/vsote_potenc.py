@@ -1,50 +1,37 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Vsote potenc
+#
+# Naloge tokrat rešujte z zankami.
+# =====================================================================@000978=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
-# 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+# Sestavite funkcijo `vsota_prvih(n)`, ki vrne vsoto prvih `n` naravnih števil.
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
+def vsota_prvih(n):
+    ans = 0
+    for i in range(1, n + 1):
+        ans += i
+    return ans
+# =====================================================================@000979=
 # 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
-# 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
-# 
-# *Namig:* poglejte v knjižnico `math`.
+# Sestavite funkcijo `vsota_prvih_kvadratov(n)`, ki vrne vsoto kvadratov
+# prvih `n` naravnih števil.
 # =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
+def vsota_prvih_kvadratov(n):
+    ans = 0
+    for i in range(1, n+1):
+        ans += i ** 2
+    return ans
+# =====================================================================@000980=
 # 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
-# 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
+# Sestavite funkcijo `vsota_prvih_potenc(n, k)`, ki vrne vsoto `k`-tih potenc
+# prvih `n` naravnih števil. Argument `k` naj bo neobvezen in naj ima privzeto
+# vrednost `1`.
 # =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+def vsota_prvih_potenc(n, k=1):
+    ans = 0
+    for i in range(1, n+1):
+        ans += i ** k
+    return ans
 
 
 
@@ -604,34 +591,41 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5Nzh9:1jCqjg:PVeH7gxHRAp4meM7p2bzCFw88uM'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
+            Check.equal('vsota_prvih(0)', 0)
+            Check.equal('vsota_prvih(3)', 6)
+            Check.equal('vsota_prvih(5)', 15)
+            Check.equal('vsota_prvih(36)', 666)
+            if type(vsota_prvih(5)) != int:
+                Check.error('Funkcija vsota_prvih ne vrne celega števila.')
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5Nzl9:1jCqjg:co_hNYfqn1FlgaTl5N9pAz3GR9g'
         try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
+            Check.equal('vsota_prvih_kvadratov(3)', 14)
+            Check.equal('vsota_prvih_kvadratov(5)', 55)
+            Check.equal('vsota_prvih_kvadratov(36)', 16206)
+            if type(vsota_prvih_kvadratov(5)) != int:
+                Check.error('Funkcija vsota_prvih ne vrne celega števila.')
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5ODB9:1jCqjg:5yqID4aXs80i8ukZ2ME7lSclufA'
         try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            try:
+                Check.equal('vsota_prvih_potenc(3)', 6)
+                Check.equal('vsota_prvih_potenc(5, k=2)', 55)
+                Check.equal('vsota_prvih_potenc(36, k=3)', 443556)
+                if type(vsota_prvih_potenc(5)) != int:
+                    Check.error('Funkcija vsota_prvih ne vrne celega števila.')
+            except:
+                Check.error('Funkcija vsota_prvih_potenc ne deluje pravilno.\nAli je k nastavljen kot neobvezen argument?')
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])

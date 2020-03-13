@@ -1,50 +1,35 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Zlati rez
+#
+# Pravimo, da sta števili $a$ in $b$ v razmerju _zlatega reza_, kadar je
+# $a : b$ enako $(a + b) : a$, kar je takrat, ko je $\frac{a}{b}$ enako
+# številu $\phi = \frac{1 + \sqrt{5}}{2}$.
+# 
+# Približek števila $\phi$ lahko izračunamo z zaporedjem
+#   $\phi_0, \phi_1, \phi_2, \dots$,
+# kjer je $\phi_0 = 1$, naslednji približek $\phi_{n + 1}$ pa izračunamo
+# kot
+#   $\phi_{n + 1} = 1 + 1 / \phi_n$.
+# =====================================================================@001000=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
-# 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+# Sestavite funkcijo `naslednji_priblizek`, ki iz podanega približka po
+# zgornjem postopku izračuna naslednji približek števila $\phi$.
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
+
+# =====================================================================@001001=
 # 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
-# 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
-# 
-# *Namig:* poglejte v knjižnico `math`.
+# Sestavite funkcijo `priblizek(k)`, ki izračuna `k`. približek števila
+# $\phi$. Za začetni približek (ko je `k` enak $0$) vzamite število $1$.
 # =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
+
+# =====================================================================@001002=
 # 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
-# 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
+# Sestavite funkcijo `natancni_priblizek`, ki sprejme pozitivno realno 
+# število, ki predstavlja natančnost, ter izračuna prvi približek
+# števila $\phi$, ki se od prejšnjega približka razlikuje za manj kot
+# podano natančnost.
 # =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+
 
 
 
@@ -604,34 +589,38 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoxMDAwfQ:1jCqjg:2ymR1G31pq4Wes9lm0A2T264Tos'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
+            Check.equal("naslednji_priblizek(1)", 2)
+            Check.equal("naslednji_priblizek(2)", 3 / 2)
+            Check.equal("naslednji_priblizek(3 / 2)", 5 / 3)
+            Check.equal("naslednji_priblizek(5 / 3)", 8 / 5)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoxMDAxfQ:1jCqjg:H-pAtb_kronyPlRnK6bu2rm6yrI'
         try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
+            Check.equal("priblizek(0)", 1)
+            Check.equal("priblizek(1)", 2)
+            Check.equal("priblizek(2)", 3 / 2)
+            Check.equal("priblizek(3)", 5 / 3)
+            Check.equal("priblizek(4)", 8 / 5)
+            Check.equal("priblizek(5)", 13 / 8)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoxMDAyfQ:1jCqjg:7hNHXmx7zjwo9_mgp7tkhOJZSY0'
         try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            Check.equal("natancni_priblizek(0.1)", 1.6)
+            Check.equal("natancni_priblizek(0.05)", 1.625)
+            Check.equal("natancni_priblizek(0.01)", 1.6153846153846154)
+            Check.equal("natancni_priblizek(0.001)", 1.6181818181818182)
+            Check.equal("natancni_priblizek(0.005)", 1.619047619047619)
+            Check.equal("natancni_priblizek(0.0001)", 1.6180555555555556)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])

@@ -1,50 +1,50 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Pravilni del gesla
+#
+# Micka in Tonček se igrata vislice. Micka si je izmislila geslo, Tonček pa ga 
+# poskuša uganiti.
+# =====================================================================@024175=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
+# Definirajte funkcijo `pravilni_del_gesla`, ki sprejme geslo in do sedaj ugibane 
+# črke. Funkcija naj vrne geslo, v katerem so črke, ki jih Tonček še ni uganil, 
+# zamenjane z znakom '_'.
+# Na primer:
 # 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+#     >>> pravilni_del_gesla('sladoled', 'aeighls')
+#     'sla__le_'
+#     >>> pravilni_del_gesla('dialektičnomaterialističen', 'kajeto')
+#     '__a_ekt___o_ate__a___t__e_'
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
+def pravilni_del_gesla(p, x):
+    ans = ''
+    for i in p:
+        if i in x:
+            ans += i
+            continue
+        ans += '_'
+    return ans
+
+# =====================================================================@024176=
 # 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
+# Micko zanima, katere izmed ugibanih črk so bile napačne (da lahko Tončka obesi).
 # 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
+# Definirajte funkcijo `nepravilni_ugibi`, ki sprejme geslo in do sedaj ugibane 
+# črke. Funkcija naj vrne ugibane črke, ki se na pojavljajo v geslu.
+# Na primer:
 # 
-# *Namig:* poglejte v knjižnico `math`.
+#     >>> nepravilni_ugibi('sladoled', 'aeighls')
+#     'igh'
+#     >>> nepravilni_ugibi('dialektičnomaterialističen', 'kajeto?')
+#     'j?'
 # =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
-# 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
-# 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
-# =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+def nepravilni_ugibi(p, x):
+    ans = ''
+    for i in x:
+        if not i in p:
+            # ans = i + ans # da vidmo, a majo dobr sistem
+            # slabe teste majo
+            ans += i
+    return ans
 
 
 
@@ -604,34 +604,27 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3NX0:1jCqjg:pldmd7FkxSIH_1J3X01wpuUnnuY'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
+            Check.equal('pravilni_del_gesla("sladoled", "aeighls")', 'sla__le_')
+            Check.equal('pravilni_del_gesla("dialektičnomaterialističen", "kajeto")', '__a_ekt___o_ate__a___t__e_')
+            Check.equal('pravilni_del_gesla("abcdef", "")', '______')
+            Check.equal('pravilni_del_gesla("", "ax")', '')
+            Check.equal('pravilni_del_gesla("posebni-znaki", "zn-ak")', '_____n_-znak_')
+            Check.secret(pravilni_del_gesla('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Nn0:1jCqjg:beJW4SEPFrNUyGoBjwy8hcRmj38'
         try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
-        except:
-            Check.error("Testi sprožijo izjemo\n  {0}",
-                        "\n  ".join(traceback.format_exc().split("\n"))[:-2])
-
-    if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
-        try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            Check.equal('nepravilni_ugibi("sladoled", "aeighls")', 'igh')
+            Check.equal('nepravilni_ugibi("dialektičnomaterialističen", "kajeto")', 'j')
+            Check.equal('nepravilni_ugibi("abcdef", "")', '')
+            Check.equal('nepravilni_ugibi("", "ax")', 'ax')
+            Check.equal('nepravilni_ugibi("posebni-znaki", "zn-ak")', '')
+            Check.secret(nepravilni_ugibi('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])

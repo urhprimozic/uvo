@@ -1,50 +1,20 @@
 # =============================================================================
-# Števila
-# =====================================================================@024171=
+# Gnezdenje oklepajev
+#
+# Oklepaji so pravilno gnezdeni, če uklepaji in zaklepaji nastopajo v parih in
+# število zaklepajev nikoli ne preseže števila uklepajev, ko jih štejemo od
+# leve proti desni.
+# =====================================================================@000989=
 # 1. podnaloga
-# Sestavite funkcijo `odrezi_stevko(n)`, ki izračuna število, ki ga dobimo, če
-# naravnemu številu `n` odrežemo prvo števko.
+# Sestavite funkcijo `oklepaji`, ki bo preverila, ali so v nizu oklepaji
+# pravilno gnezdeni. Na ostale znake naj se funkcija ne ozira.
 # 
-#     >>> odrezi_stevko(1234)
-#     234
-#     >>> odrezi_stevko(1)
-#     0
+#     >>> oklepaji('(a + b)^2 = (((a^2) + 2ab) + b^2)')
+#     True
+#     >>> oklepaji('())(()')
+#     False
 # =============================================================================
-def odrezi_stevko(n):
-    if n < 10:
-        return 0
-    return int(str(n)[1:])
-# =====================================================================@024172=
-# 2. podnaloga
-# Sestavite funkcijo `neceli_del(x)`, ki izračuna število, ki ga dobimo, če
-# realnemu številu `x` odštejemo največje celo število, ki je manjše od `x`.
-# 
-#     >>> neceli_del(12.34)
-#     0.34
-#     >>> neceli_del(-3.14)
-#     0.86
-# 
-# *Namig:* poglejte v knjižnico `math`.
-# =============================================================================
-import math
-def neceli_del(x):
-    # math.ceil vrne najmanjše celo število n, da velja n >= x
-    return  x - math.ceil(x) +1 
-# =====================================================================@024173=
-# 3. podnaloga
-# Kompleksno število $3 + 2i$ v Pythonu predstavimo z izrazom `3 + 2j` ali
-# `complex(3, 2)`. Tako velja na primer:
-# 
-#     >>> complex(0, 1) * 1j
-#     (-1+0j)
-# 
-# Do realne in imaginarne komponente števila `z` pa dostopamo z `z.real` in
-# `z.imag`.
-# Sestavite funkcijo `absolutna_vrednost(z)`, ki izračuna absolutno vrednost
-# kompleksnega števila `z`.
-# =============================================================================
-def absolutna_vrednost(z):
-    return math.sqrt(z.real ** 2 + z.imag ** 2)
+
 
 
 
@@ -604,34 +574,14 @@ def _validate_current_file():
     Check.initialize(file_parts)
 
     if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3MX0:1jBlMU:q_NMh9GIS6hrshl9fgZJuD0M62g'
+        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0Ijo5ODl9:1jCqjg:GHu0t3aiK3dV_Yy0R9uT36VealY'
         try:
-            Check.equal('odrezi_stevko(1)', 0)
-            Check.equal('odrezi_stevko(9)', 0)
-            Check.equal('odrezi_stevko(42)', 2)
-            Check.equal('odrezi_stevko(121)', 21)
-            Check.equal('odrezi_stevko(1234)', 234)
-            Check.equal('odrezi_stevko(12345678987654321)', 2345678987654321)
-        except:
-            Check.error("Testi sprožijo izjemo\n  {0}",
-                        "\n  ".join(traceback.format_exc().split("\n"))[:-2])
-
-    if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3Mn0:1jBlMU:al964RsL22UO0nvRREu4mx-biT0'
-        try:
-            Check.equal('neceli_del(12.34)', 0.34)
-            Check.equal('neceli_del(-3.14)', 0.86)
-            Check.equal('neceli_del(0.014)', 0.014)
-        except:
-            Check.error("Testi sprožijo izjemo\n  {0}",
-                        "\n  ".join(traceback.format_exc().split("\n"))[:-2])
-
-    if Check.part():
-        Check.current_part['token'] = 'eyJ1c2VyIjo1MzYzLCJwYXJ0IjoyNDE3M30:1jBlMU:F7X7X9TZdX4IdEnXOd1cRHKzRZw'
-        try:
-            Check.equal('absolutna_vrednost(complex(1,1))', 1.4142135623730951)
-            Check.equal('absolutna_vrednost(complex(0,1))', 1.0)
-            Check.equal('absolutna_vrednost(complex(-1,0))', 1.0)
+            Check.equal('oklepaji("(a + b)^2 = (((a^2) + 2ab) + b^2)")', True)
+            Check.equal('oklepaji("())(()")', False)
+            Check.equal('oklepaji("(2 + a) + ((3 - x) + (3 - 2))")', True) and \
+                Check.equal('oklepaji("() +krneki-/*+3@ (() - ()((()())))")', True) and \
+                Check.equal('oklepaji("(((()) + (")', False) and \
+                Check.equal('oklepaji("(2 + 3) - 3 + ) (")', False)
         except:
             Check.error("Testi sprožijo izjemo\n  {0}",
                         "\n  ".join(traceback.format_exc().split("\n"))[:-2])
