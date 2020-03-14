@@ -14,8 +14,18 @@
 #     >>> oklepaji('())(()')
 #     False
 # =============================================================================
-
-
+def oklepaji(niz):
+    stack = 0
+    for i in niz:
+        if i == '(':
+            stack += 1
+        if i == ')':
+            if stack == 0:
+                return False
+            stack -= 1
+    if stack == 0:
+        return True
+    return False
 
 
 

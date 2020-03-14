@@ -14,6 +14,11 @@
 #     >>> pripravi_primer(['daj', 'cas', 'da', 5, 'zapeljem', 'mi', 'te', 'minut'],[3, 4, 5, 0, 7, 2, 6, 1])
 #     [('daj', 3), ('cas', 4), ('da', 5), (5, 0), ('zapeljem', 7), ('mi', 2), ('te', 6), ('minut', 1)]
 # =============================================================================
+def pripravi_primer(a, b):
+    test = []
+    for i in range(len(a)):
+        test.append((a[i], b[i]))
+    return test
 
 # =====================================================================@020192=
 # 2. podnaloga
@@ -32,7 +37,11 @@
 #     >>> pravilno_urejen([(5, 0), ('minut', 1), ('mi', 2), ('daj', 3), ('cas', 4), ('da', 5), ('te', 6), ('zapeljem', 7)])
 #     True
 # =============================================================================
-
+def pravilno_urejen(sez):
+    for index, par in enumerate(sez):
+        if index != par[1]:
+            return False
+    return True
 
 
 
